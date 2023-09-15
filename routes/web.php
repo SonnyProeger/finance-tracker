@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionImportController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,11 +17,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -29,7 +28,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard1', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/dashboard', [TransactionController::class, 'showDashboard'])->name('dashboard');
+
+    Route::get('/upload', [TransactionImportController::class, 'showUploadForm'])->name('upload');
+
+    Route::post('/import', [TransactionImportController::class, 'import'])->name('import');
 });
