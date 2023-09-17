@@ -28,12 +28,16 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard1', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
-    Route::get('/dashboard', [TransactionController::class, 'showDashboard'])->name('dashboard');
-
+    Route::get('/dashboard', [
+        TransactionController::class, 'showDashboard',
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ])->name('dashboard');
+    Route::get('/transactions', [
+        TransactionController::class, 'showDashboard',
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ])->name('transactions');
     Route::get('/upload', [TransactionImportController::class, 'showUploadForm'])->name('upload');
 
     Route::post('/import', [TransactionImportController::class, 'import'])->name('import');
