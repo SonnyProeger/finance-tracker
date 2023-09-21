@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Add a foreign key column
             $table->integer('Rekeningnummer');
             $table->string('Muntsoort');
             $table->date('Transactiedatum');
@@ -22,6 +22,9 @@ return new class extends Migration
             $table->decimal('Transactiebedrag', 10, 2);
             $table->text('Omschrijving');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

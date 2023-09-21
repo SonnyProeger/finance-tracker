@@ -9,7 +9,7 @@ class TransactionService
     /**
      * Calculate the total income based on transactions data.
      *
-     * @param Collection $transactions
+     * @param  Collection  $transactions
      * @return float
      */
     public function calculateIncome(Collection $transactions)
@@ -22,14 +22,14 @@ class TransactionService
         // Calculate the total income
         $totalIncome = $incomeTransactions->sum('Transactiebedrag');
 
-        $formattedIncome = '€' . number_format(abs($totalIncome), 2, '.', ',');
+        $formattedIncome = '€'.number_format(abs($totalIncome), 2, '.', ',');
 
         return $formattedIncome;
     }
 
     public function calculateExpenses(Collection $transactions)
     {
-        // Filter transactions to consider only income (positive transactions)
+        // Filter transactions to consider only expenses (negative transactions)
         $incomeTransactions = $transactions->filter(function ($transaction) {
             return $transaction->Transactiebedrag < 0;
         });
@@ -37,7 +37,7 @@ class TransactionService
         // Calculate the total income
         $totalExpenses = $incomeTransactions->sum('Transactiebedrag');
 
-        $formattedExpenses = '€' . number_format(abs($totalExpenses), 2, '.', ',');
+        $formattedExpenses = '€'.number_format(abs($totalExpenses), 2, '.', ',');
 
         return $formattedExpenses;
     }
@@ -52,7 +52,7 @@ class TransactionService
             $balance = $latestTransaction->Eindsaldo;
 
             // Format the balance as currency
-            $formattedBalance = '€' . number_format($balance, 2);
+            $formattedBalance = '€'.number_format($balance, 2);
 
             return $formattedBalance;
         }

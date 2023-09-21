@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,9 @@ class TransactionFactory extends Factory
      */
     public function definition(): array
     {
+        // Retrieve a random user
+        $randomUserId = User::inRandomOrder()->first()->id;
+
         // Generate a random debit or credit transaction
         $isDebit = $this->faker->boolean;
         $transactionAmount = $this->faker->randomFloat(2, 10, 500);
@@ -33,6 +37,7 @@ class TransactionFactory extends Factory
         $this->currentDate = $this->faker->dateTimeBetween($this->currentDate, 'now')->format('Ymd');
 
         return [
+            'User_id' => $randomUserId,
             'Rekeningnummer' => $this->faker->bankAccountNumber,
             'Muntsoort' => 'EUR',
             'Transactiedatum' => $this->currentDate,
@@ -44,3 +49,4 @@ class TransactionFactory extends Factory
         ];
     }
 }
+

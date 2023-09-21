@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
@@ -24,18 +25,24 @@ class TransactionImport implements ToModel, WithStartRow
 
         $rentedatum = Carbon::createFromFormat('Ymd', $row[3]);
 
-        return new Transaction([
-            'Rekeningnummer' => $row[0],
-            'Muntsoort' => $row[1],
-            'Transactiedatum' => $transactiedatum,
-            'Rentedatum' => $rentedatum,
-            'Beginsaldo' => $row[4],
-            'Eindsaldo' => $row[5],
-            'Transactiebedrag' => $row[6],
-            'Omschrijving' => $row[7],
-        ]);
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Check if the user is authenticated
+        if ($user) {
+            return new Transaction([
+                'User_id' => $user->id,
+                'Rekeningnummer' => $row[0],
+                'Muntsoort' => $row[1],
+                'Transactiedatum' => $transactiedatum,
+                'Rentedatum' => $rentedatum,
+                'Beginsaldo' => $row[4],
+                'Eindsaldo' => $row[5],
+                'Transactiebedrag' => $row[6],
+                'Omschrijving' => $row[7],
+            ]);
+        }
+
+        return null;
     }
-
-
-
 }

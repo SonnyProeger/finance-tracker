@@ -28,17 +28,20 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/profile', function () {
+        return Inertia::render('Profile/Show');
+    });
     Route::get('/dashboard', [
         TransactionController::class, 'showDashboard',
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ])->name('dashboard');
     Route::get('/transactions', [
-        TransactionController::class, 'showDashboard',
+        TransactionController::class, 'showTransactions',
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ])->name('transactions');
-    Route::get('/upload', [TransactionImportController::class, 'showUploadForm'])->name('upload');
 
+    Route::get('/upload', [TransactionImportController::class, 'showUploadForm'])->name('upload');
     Route::post('/import', [TransactionImportController::class, 'import'])->name('import');
 });
