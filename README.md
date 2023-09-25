@@ -3,6 +3,7 @@
 <p id="description">
 
 The Finance Tracker App is a web application for managing your financial transactions, visualizing financial data, and setting and monitoring budgets. This README provides an overview of the application, its features, and how to set it up using Laravel Sail.
+At the moment this only works for ABN AMRO .xlsx
 </p>
 
 
@@ -11,8 +12,8 @@ The Finance Tracker App is a web application for managing your financial transac
 Here're some of the project's best features:
 
 *   Transaction Management: Easily record income and expenses with details such as date amount and description.
-*   Data Visualization: Visualize your financial data using charts and graphs to gain insights into your financial health.
-*   Budget Tracking: Set budgets for different categories and track your spending against these budgets.
+*   WIP   * Data Visualization: Visualize your financial data using charts and graphs to gain insights into your financial health.
+*   WIP   * Budget Tracking: Set budgets for different categories and track your spending against these budgets.
 
 ## Prerequisites
 
