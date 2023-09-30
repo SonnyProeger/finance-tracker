@@ -72,7 +72,12 @@ cp .env.example .env
 
 <h2>🍰 Contribution Guidelines:</h2>
 
-Contributions are welcome! If you'd like to contribute to this project please follow these guidelines: Fork the repository. Create a new branch for your feature or bug fix: shell Copy code git checkout -b feature/your-feature-name Make your changes and commit them: shell Copy code git commit -m "Add your commit message here" Push your changes to your fork: shell Copy code git push origin feature/your-feature-name Open a pull request to the main branch of this repository.
+Contributions are welcome! If you'd like to contribute to this project please follow these guidelines: 
+Fork the repository. 
+Create a new branch for your feature or bug fix: shell Copy code git checkout -b feature/your-feature-name 
+Make your changes and commit them: shell Copy code git commit -m "Add your commit message here" 
+Push your changes to your fork: shell Copy code git push origin feature/your-feature-name 
+Open a pull request to the main branch of this repository.
 
   
   
